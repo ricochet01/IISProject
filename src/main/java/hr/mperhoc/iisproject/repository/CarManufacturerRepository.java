@@ -1,8 +1,7 @@
 package hr.mperhoc.iisproject.repository;
 
-import java.util.List;
-
 import hr.mperhoc.iisproject.model.CarManufacturer;
+import hr.mperhoc.iisproject.model.list.CarManufacturersList;
 
 public interface CarManufacturerRepository {
 
@@ -14,5 +13,5 @@ public interface CarManufacturerRepository {
 
 	CarManufacturer get(int id);
 
-	List<CarManufacturer> getAll();
+	CarManufacturersList getAll();
 }

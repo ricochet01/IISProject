@@ -1,9 +1,10 @@
-package hr.mperhoc.iisproject.auth.filter;
+package hr.mperhoc.iisproject.resources;
 
 import java.io.IOException;
 import java.security.Principal;
 
 import hr.mperhoc.iisproject.auth.Secured;
+import hr.mperhoc.iisproject.auth.token.JwtTokenUtils;
 import jakarta.annotation.Priority;
 import jakarta.ws.rs.Priorities;
 import jakarta.ws.rs.container.ContainerRequestContext;
@@ -62,6 +63,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 				}
 			});
 		} catch (Exception e) {
+			System.out.println("2");
 			abortWithUnauthorized(requestContext);
 		}
 	}
@@ -70,8 +72,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 		// Check if the Authorization header is valid
 		// It must not be null and must be prefixed with "Bearer" plus a whitespace
 		// The authentication scheme comparison must be case-insensitive
-		return authorizationHeader != null
-				&& authorizationHeader.toLowerCase().startsWith(AUTHENTICATION_SCHEME.toLowerCase() + " ");
+		return authorizationHeader != null && authorizationHeader.startsWith(AUTHENTICATION_SCHEME + " ");
 	}
 
 	private void abortWithUnauthorized(ContainerRequestContext requestContext) {
@@ -82,8 +83,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 	}
 
 	private void validateToken(String token) throws Exception {
-		// Check if the token was issued by the server and if it's not expired
-		// Throw an Exception if the token is invalid
+		if (!JwtTokenUtils.parseJwt(token)) throw new Exception("Invalid token!");
 	}
 
 }

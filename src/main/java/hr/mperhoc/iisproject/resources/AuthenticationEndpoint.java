@@ -3,6 +3,7 @@ package hr.mperhoc.iisproject.resources;
 import java.util.List;
 
 import hr.mperhoc.iisproject.auth.Credentials;
+import hr.mperhoc.iisproject.auth.token.JwtTokenUtils;
 import hr.mperhoc.iisproject.model.User;
 import hr.mperhoc.iisproject.repository.factory.UserRepositoryFactory;
 import jakarta.ws.rs.Consumes;
@@ -42,7 +43,7 @@ public class AuthenticationEndpoint {
 			authenticate(username, password);
 
 			// Issue a token for the user
-			String token = issueToken(credentials.getUsername());
+			String token = issueToken(username);
 
 			// Return the token on the response
 			return Response.ok(token).build();
@@ -78,8 +79,7 @@ public class AuthenticationEndpoint {
 	}
 
 	private String issueToken(String username) {
-		// TODO: generate JWT token
-		return "";
+		return JwtTokenUtils.generateJwt(username);
 	}
 
 }

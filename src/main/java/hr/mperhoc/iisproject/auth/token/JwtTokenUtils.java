@@ -8,8 +8,6 @@ import java.util.Date;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
@@ -24,8 +22,15 @@ public class JwtTokenUtils {
 				.expiration(Date.from(now.plus(30, ChronoUnit.MINUTES))).signWith(Keys.hmacShaKeyFor(SECRET)).compact();
 	}
 
-	public static void parseJwt(String token) {
+	public static boolean parseJwt(String token) {
 		SecretKey key = new SecretKeySpec(SECRET, ALGORITHM);
-		Jws<Claims> claims = Jwts.parser().decryptWith(key).build().parseSignedClaims(token);
+
+		try {
+			// Jws<Claims> claims =
+			Jwts.parser().verifyWith(key).build().parseSignedClaims(token);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }

@@ -1,6 +1,9 @@
 package hr.mperhoc.iisproject.auth;
 
-public class Credentials {
+import java.io.Serializable;
+
+public class Credentials implements Serializable {
+	private static final long serialVersionUID = -6964313146358863961L;
 	private String email, username, password;
 
 	public String getEmail() {

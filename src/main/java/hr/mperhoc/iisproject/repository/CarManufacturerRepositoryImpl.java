@@ -1,7 +1,5 @@
 package hr.mperhoc.iisproject.repository;
 
-import java.util.List;
-
 import hr.mperhoc.iisproject.model.CarManufacturer;
 import hr.mperhoc.iisproject.model.list.CarManufacturersList;
 
@@ -33,7 +31,7 @@ public class CarManufacturerRepositoryImpl implements CarManufacturerRepository 
 	}
 
 	@Override
-	public List<CarManufacturer> getAll() {
-		return manufacturers.getManufacturers();
+	public CarManufacturersList getAll() {
+		return manufacturers;
 	}
 }
