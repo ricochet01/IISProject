@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.example.org/car"
+	xmlns:tns="http://www.example.org/car" elementFormDefault="qualified">
+	
+	<xs:element name="car">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="manufacturer">
+					<xs:complexType>
+						<xs:attribute name="name" type="xs:string" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="model" type="xs:string"/>
+				<xs:element name="productionYear" type="xs:integer"/>
+				<xs:element name="power" type="xs:integer"/>
+				<xs:element name="torque" type="xs:integer"/>
+				<xs:element name="weight" type="xs:integer"/>
+				<xs:element name="weightDistributionFront" type="xs:integer"/>
+				<xs:element name="displacement" type="xs:integer"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</schema>
