@@ -9,27 +9,36 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "manufacturer")
-@XmlAccessorType(XmlAccessType.NONE)
-public class CarManufacturer implements Serializable {
-	private static final long serialVersionUID = 3687363956259598580L;
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Manufacturer implements Serializable {
+	private static final long serialVersionUID = -4270950905685329692L;
 	private static int idCounter = 0;
 
 	@XmlAttribute
-	private final int id;
+	private int id;
 	@XmlAttribute
 	private String name;
 
-	public CarManufacturer() {
+	public Manufacturer() {
 		this.id = idCounter++;
 	}
 
-	public CarManufacturer(String name) {
+	public Manufacturer(String name) {
 		this();
+		this.name = name;
+	}
+
+	public Manufacturer(int id, String name) {
+		this.id = id;
 		this.name = name;
 	}
 
 	public int getId() {
 		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -47,19 +56,15 @@ public class CarManufacturer implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		CarManufacturer other = (CarManufacturer) obj;
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		Manufacturer other = (Manufacturer) obj;
 		return Objects.equals(name, other.name) && id == other.id;
 	}
 
 	@Override
 	public String toString() {
-		return "CarManufacturer [name=" + name + "]";
+		return "Manufacturer [name=" + name + "]";
 	}
-
 }

@@ -1,7 +1,7 @@
 package hr.mperhoc.iisproject.resources;
 
-import hr.mperhoc.iisproject.model.CarManufacturer;
-import hr.mperhoc.iisproject.repository.factory.CarManufacturerRepositoryFactory;
+import hr.mperhoc.iisproject.model.Manufacturer;
+import hr.mperhoc.iisproject.repository.factory.ManufacturerRepositoryFactory;
 import hr.mperhoc.iisproject.xml.XMLUtils;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -13,17 +13,17 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 @Path("/manufacturers")
-public class CarManufacturerResource {
+public class ManufacturerResource {
 
 	@GET
 	public String getAll() {
-		return XMLUtils.toXml(CarManufacturerRepositoryFactory.get().getAll());
+		return XMLUtils.toXml(ManufacturerRepositoryFactory.get().getAll());
 	}
 
 	@GET
 	@Path("/{id}")
 	public String getById(@PathParam("id") int id) {
-		return XMLUtils.toXml(CarManufacturerRepositoryFactory.get().get(id));
+		return XMLUtils.toXml(ManufacturerRepositoryFactory.get().get(id));
 	}
 
 	@POST
@@ -31,8 +31,8 @@ public class CarManufacturerResource {
 	@Produces(MediaType.APPLICATION_XML)
 	public Response addManufacturer(String content) {
 		// Still basic code, have to add error handling
-		CarManufacturer manufacturer = XMLUtils.fromXml(content, CarManufacturer.class);
-		CarManufacturerRepositoryFactory.get().add(manufacturer);
+		Manufacturer manufacturer = XMLUtils.fromXml(content, Manufacturer.class);
+		ManufacturerRepositoryFactory.get().add(manufacturer);
 
 		return Response.ok(content).build();
 	}

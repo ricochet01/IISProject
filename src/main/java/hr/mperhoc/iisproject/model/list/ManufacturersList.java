@@ -5,27 +5,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import hr.mperhoc.iisproject.model.CarManufacturer;
+import hr.mperhoc.iisproject.model.Manufacturer;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "manufacturers")
-@XmlAccessorType(XmlAccessType.FIELD)
-public class CarManufacturersList {
-	@XmlElement(name = "manufacturer")
-	private Map<Integer, CarManufacturer> manufacturers = new HashMap<>();
+@XmlAccessorType(XmlAccessType.PROPERTY)
+public class ManufacturersList {
+	private Map<Integer, Manufacturer> manufacturers = new HashMap<>();
 
-	public void add(CarManufacturer m) {
+	public void add(Manufacturer m) {
 		manufacturers.put(m.getId(), m);
 	}
 
-	public CarManufacturer get(int id) {
+	public Manufacturer get(int id) {
 		return manufacturers.get(id);
 	}
 
-	public void update(int id, CarManufacturer cm) {
+	public void update(int id, Manufacturer cm) {
 		manufacturers.put(id, cm);
 	}
 
@@ -37,7 +36,8 @@ public class CarManufacturersList {
 		return manufacturers.size();
 	}
 
-	public List<CarManufacturer> getManufacturers() {
+	@XmlElement(name = "manufacturer")
+	public List<Manufacturer> getManufacturers() {
 		return new ArrayList<>(manufacturers.values());
 	}
 }

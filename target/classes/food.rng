@@ -1,0 +1,25 @@
+<element name="food" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <element name="manufacturer">
+        <attribute name="name">
+            <text/>
+      </attribute>
+    </element>
+    <element name="name">
+        <text/>
+    </element>
+    <element name="amount">
+        <data type="integer"/>
+    </element>
+    <element name="measuringUnit">
+        <text/>
+    </element>
+  	<element name="ingredients">
+        <text/>
+    </element>
+    <element name="caloriesPer100">
+        <data type="integer"/>
+    </element>
+    <element name="countryOfOrigin">
+        <text/>
+    </element>
+</element>
