@@ -12,7 +12,6 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.NONE)
 public class Country implements Serializable {
 	private static final long serialVersionUID = -1900593552971022392L;
-
 	private static int idCounter = 0;
 
 	@XmlAttribute
@@ -26,6 +25,11 @@ public class Country implements Serializable {
 
 	public Country(String name) {
 		this();
+		this.name = name;
+	}
+
+	public Country(int id, String name) {
+		this.id = id;
 		this.name = name;
 	}
 

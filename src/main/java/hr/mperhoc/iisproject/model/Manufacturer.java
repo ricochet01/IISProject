@@ -15,7 +15,7 @@ public class Manufacturer implements Serializable {
 	private static int idCounter = 0;
 
 	@XmlAttribute
-	private int id;
+	private final int id;
 	@XmlAttribute
 	private String name;
 
@@ -35,10 +35,6 @@ public class Manufacturer implements Serializable {
 
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getName() {

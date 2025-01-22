@@ -12,9 +12,8 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "countries")
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class CountryList {
-	@XmlElement(name = "country")
 	private Map<Integer, Country> countries = new HashMap<>();
 
 	public void add(Country c) {
@@ -37,7 +36,8 @@ public class CountryList {
 		return countries.size();
 	}
 
-	public List<Country> getManufacturers() {
+	@XmlElement(name = "country")
+	public List<Country> getCountries() {
 		return new ArrayList<>(countries.values());
 	}
 }

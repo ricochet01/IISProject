@@ -16,11 +16,9 @@ public class ManufacturerAdapter extends XmlAdapter<ManufacturerAdapter.Manufact
 		@XmlAttribute
 		private String name;
 
-		// Default constructor
 		public ManufacturerDto() {
 		}
 
-		// Constructor for adapter
 		public ManufacturerDto(int id, String name) {
 			this.id = id;
 			this.name = name;
@@ -40,14 +38,13 @@ public class ManufacturerAdapter extends XmlAdapter<ManufacturerAdapter.Manufact
 	}
 
 	@Override
-	public Manufacturer unmarshal(ManufacturerDto value) throws Exception {
-		Manufacturer manufacturer = new Manufacturer(value.getId(), value.getName());
-		return manufacturer;
+	public ManufacturerDto marshal(Manufacturer value) throws Exception {
+		return new ManufacturerDto(value.getId(), value.getName());
 	}
 
 	@Override
-	public ManufacturerDto marshal(Manufacturer value) throws Exception {
-		return new ManufacturerDto(value.getId(), value.getName());
+	public Manufacturer unmarshal(ManufacturerDto value) throws Exception {
+		return new Manufacturer(value.id, value.name);
 	}
 
 }

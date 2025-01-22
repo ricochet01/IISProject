@@ -1,13 +1,13 @@
 package hr.mperhoc.iisproject.repository;
 
 import hr.mperhoc.iisproject.model.Manufacturer;
-import hr.mperhoc.iisproject.model.list.ManufacturersList;
+import hr.mperhoc.iisproject.model.list.ManufacturerList;
 
 public class ManufacturerRepositoryImpl implements ManufacturerRepository {
-	private ManufacturersList manufacturers;
+	private ManufacturerList manufacturers;
 
 	public ManufacturerRepositoryImpl() {
-		manufacturers = new ManufacturersList();
+		manufacturers = new ManufacturerList();
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class ManufacturerRepositoryImpl implements ManufacturerRepository {
 	}
 
 	@Override
-	public ManufacturersList getAll() {
+	public ManufacturerList getAll() {
 		return manufacturers;
 	}
 }

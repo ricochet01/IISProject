@@ -13,7 +13,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "manufacturers")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class ManufacturersList {
+public class ManufacturerList {
 	private Map<Integer, Manufacturer> manufacturers = new HashMap<>();
 
 	public void add(Manufacturer m) {

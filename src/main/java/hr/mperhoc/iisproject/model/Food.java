@@ -3,6 +3,7 @@ package hr.mperhoc.iisproject.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import hr.mperhoc.iisproject.util.adapter.CountryAdapter;
 import hr.mperhoc.iisproject.util.adapter.ManufacturerAdapter;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -27,14 +28,16 @@ public class Food implements Serializable {
 	private int amount;
 	private String measuringUnit, ingredients;
 	private int caloriesPer100;
-	private String countryOfOrigin; // TODO: change to Country class
+	@XmlJavaTypeAdapter(CountryAdapter.class)
+	@XmlElement
+	private Country countryOfOrigin; // TODO: change to Country class
 
 	public Food() {
 		this.id = idCounter++;
 	}
 
 	public Food(Manufacturer manufacturer, String name, int amount, String measuringUnit, String ingredients,
-			int caloriesPer100, String countryOfOrigin) {
+			int caloriesPer100, Country countryOfOrigin) {
 		this();
 		this.manufacturer = manufacturer;
 		this.name = name;
@@ -97,11 +100,11 @@ public class Food implements Serializable {
 		this.caloriesPer100 = caloriesPer100;
 	}
 
-	public String getCountryOfOrigin() {
+	public Country getCountryOfOrigin() {
 		return countryOfOrigin;
 	}
 
-	public void setCountryOfOrigin(String countryOfOrigin) {
+	public void setCountryOfOrigin(Country countryOfOrigin) {
 		this.countryOfOrigin = countryOfOrigin;
 	}
 

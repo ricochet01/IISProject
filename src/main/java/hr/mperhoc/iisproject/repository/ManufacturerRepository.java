@@ -1,7 +1,7 @@
 package hr.mperhoc.iisproject.repository;
 
 import hr.mperhoc.iisproject.model.Manufacturer;
-import hr.mperhoc.iisproject.model.list.ManufacturersList;
+import hr.mperhoc.iisproject.model.list.ManufacturerList;
 
 public interface ManufacturerRepository {
 
@@ -13,5 +13,5 @@ public interface ManufacturerRepository {
 
 	Manufacturer get(int id);
 
-	ManufacturersList getAll();
+	ManufacturerList getAll();
 }

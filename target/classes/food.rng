@@ -1,8 +1,7 @@
+<?xml version="1.0"?>
 <element name="food" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
     <element name="manufacturer">
-        <attribute name="name">
-            <text/>
-      </attribute>
+        <attribute name="name" />
     </element>
     <element name="name">
         <text/>
@@ -20,6 +19,6 @@
         <data type="integer"/>
     </element>
     <element name="countryOfOrigin">
-        <text/>
+        <attribute name="name"/>
     </element>
 </element>

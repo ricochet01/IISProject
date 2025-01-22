@@ -16,7 +16,11 @@
 				<xs:element name="measuringUnit" type="xs:string"/>
 				<xs:element name="ingredients" type="xs:string"/>
 				<xs:element name="caloriesPer100" type="xs:integer"/>
-				<xs:element name="countryOfOrigin" type="xs:string"/>
+				<xs:element name="countryOfOrigin">
+					<xs:complexType>
+						<xs:attribute name="name" type="xs:string" />
+					</xs:complexType>
+				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

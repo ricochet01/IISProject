@@ -4,36 +4,35 @@ import hr.mperhoc.iisproject.model.Food;
 import hr.mperhoc.iisproject.model.list.FoodList;
 
 public class FoodRepositoryImpl implements FoodRepository {
-	private FoodList cars;
+	private FoodList foods;
 
 	public FoodRepositoryImpl() {
-		cars = new FoodList();
+		foods = new FoodList();
 	}
 
 	@Override
-	public void add(Food c) {
-		cars.add(c);
+	public void add(Food f) {
+		foods.add(f);
 	}
 
 	@Override
-	public void update(int id, Food c) {
-		// TODO Auto-generated method stub
+	public void update(int id, Food f) {
+		foods.update(id, f);
 	}
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
+		foods.remove(id);
 	}
 
 	@Override
 	public Food get(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return foods.get(id);
 	}
 
 	@Override
 	public FoodList getAll() {
-		return cars;
+		return foods;
 	}
 
 }
