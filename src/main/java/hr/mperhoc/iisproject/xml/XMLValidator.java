@@ -27,8 +27,8 @@ public class XMLValidator {
 		System.setProperty(SchemaFactory.class.getName() + ":" + XMLConstants.RELAXNG_NS_URI,
 				"com.thaiopensource.relaxng.jaxp.XMLSyntaxSchemaFactory");
 
-		xsdFile = XMLValidator.class.getResource("/food.xsd");
-		rngFile = XMLValidator.class.getResource("/food.rng");
+		xsdFile = XMLValidator.class.getResource("/xsd/food.xsd");
+		rngFile = XMLValidator.class.getResource("/rng/food.rng");
 
 		xsdSchemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		rngSchemaFactory = SchemaFactory.newInstance(XMLConstants.RELAXNG_NS_URI);

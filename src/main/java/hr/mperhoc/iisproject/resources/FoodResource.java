@@ -41,11 +41,31 @@ public class FoodResource {
 	@Secured
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML)
-	public Response addFood(String content) {
+	@Path("/xsd-verify")
+	public Response addFoodAndValidateXsd(String content) {
+		// Is the given XML invalid
+		if (!XMLValidator.validateXsd(content)) {
+			return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+		}
+
+		return addFood(content);
+	}
+
+	@POST
+	@Secured
+	@Consumes(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_XML)
+	@Path("/rng-verify")
+	public Response addFoodAndValidateRng(String content) {
 		// Is the given XML invalid
 		if (!XMLValidator.validateRng(content)) {
 			return Response.status(Response.Status.NOT_ACCEPTABLE).build();
 		}
+
+		return addFood(content);
+	}
+
+	private Response addFood(String content) {
 
 		Food food = XMLUtils.fromXml(content, Food.class);
 		FoodRepositoryFactory.get().add(food);
