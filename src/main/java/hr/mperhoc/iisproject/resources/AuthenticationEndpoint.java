@@ -2,6 +2,8 @@ package hr.mperhoc.iisproject.resources;
 
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import hr.mperhoc.iisproject.auth.Credentials;
 import hr.mperhoc.iisproject.auth.token.JwtTokenUtils;
 import hr.mperhoc.iisproject.model.User;
@@ -61,7 +63,7 @@ public class AuthenticationEndpoint {
 
 		// Check if passwords match
 		// TODO: use BCrypt
-		if (!user.getPassword().contentEquals(password)) {
+		if (!BCrypt.checkpw(password, user.getPassword())) {
 			throw new Exception("Invalid credentials!");
 		}
 

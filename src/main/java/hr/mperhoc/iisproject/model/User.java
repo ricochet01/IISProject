@@ -2,6 +2,8 @@ package hr.mperhoc.iisproject.model;
 
 import java.io.Serializable;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import hr.mperhoc.iisproject.auth.Credentials;
 
 public class User implements Serializable {
@@ -18,7 +20,7 @@ public class User implements Serializable {
 		this.id = idCounter++;
 		this.email = email;
 		this.username = username;
-		this.password = password;
+		this.password = BCrypt.hashpw(password, BCrypt.gensalt());
 	}
 
 	public User(Credentials credentials) {

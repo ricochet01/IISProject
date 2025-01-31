@@ -13,6 +13,11 @@ import javax.xml.validation.Validator;
 
 import org.xml.sax.SAXException;
 
+import hr.mperhoc.iisproject.model.Food;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
+
 public class XMLValidator {
 	// Schema definitions
 	private static SchemaFactory xsdSchemaFactory, rngSchemaFactory;
@@ -61,6 +66,20 @@ public class XMLValidator {
 			rngValidator.validate(src);
 			return true;
 		} catch (SAXException | IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public static boolean validateJaxb(String xml) {
+		try {
+			JAXBContext jaxbContext = JAXBContext.newInstance(Food.class);
+			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+			unmarshaller.setSchema(xsdSchema);
+
+			unmarshaller.unmarshal(new StringReader(xml));
+			return true;
+		} catch (JAXBException e) {
 			e.printStackTrace();
 			return false;
 		}

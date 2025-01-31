@@ -26,8 +26,7 @@ public class FoodResource {
 	@GET
 	@Secured
 	public Response getAll() {
-		return Response.status(Response.Status.CREATED).entity(XMLUtils.toXml(FoodRepositoryFactory.get().getAll()))
-				.build();
+		return Response.status(Response.Status.OK).entity(XMLUtils.toXml(FoodRepositoryFactory.get().getAll())).build();
 	}
 
 	@GET

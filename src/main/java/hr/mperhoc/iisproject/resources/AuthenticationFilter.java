@@ -38,7 +38,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 		try {
 			// Validate the token
 			validateToken(token);
-			String username = ""; // TODO: find username based on token
+			String username = "test"; // TODO: find username based on token
 
 			final SecurityContext currentSecurityContext = requestContext.getSecurityContext();
 			requestContext.setSecurityContext(new SecurityContext() {
@@ -63,7 +63,6 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 				}
 			});
 		} catch (Exception e) {
-			System.out.println("2");
 			abortWithUnauthorized(requestContext);
 		}
 	}
