@@ -8,6 +8,7 @@ import org.xml.sax.SAXException;
 
 import hr.mperhoc.iisproject.repository.factory.FoodRepositoryFactory;
 import hr.mperhoc.iisproject.xml.XMLUtils;
+import hr.mperhoc.iisproject.xml.XMLValidator;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebResult;
@@ -26,7 +27,7 @@ public class FoodService {
 		// //"//food[contains(name, '" + name + "')]";
 		// XML file with all Food entities
 		String xmlFile = XMLUtils.toXml(FoodRepositoryFactory.get().getAll());
-//		if (!XMLValidator.validateJaxb(xmlFile)) return "Error while validating!";
+		if (!XMLValidator.validateJaxb(xmlFile)) return "Error while validating!";
 
 		String xPathExpression = String.format("//food[contains(name, '%s')]", name);
 		String filteredXml = "";

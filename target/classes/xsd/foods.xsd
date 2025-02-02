@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified">
+	<xs:element name="foods">
+    	<xs:complexType>
+      		<xs:sequence>
+				<xs:element name="food" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="manufacturer">
+								<xs:complexType>
+									<xs:attribute name="id" type="xs:integer" />
+									<xs:attribute name="name" type="xs:string" />
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="name" type="xs:string"/>
+							<xs:element name="amount" type="xs:integer"/>
+							<xs:element name="measuringUnit" type="xs:string"/>
+							<xs:element name="ingredients" type="xs:string"/>
+							<xs:element name="caloriesPer100" type="xs:integer"/>
+							<xs:element name="countryOfOrigin">
+								<xs:complexType>
+									<xs:attribute name="id" type="xs:integer" />
+									<xs:attribute name="name" type="xs:string" />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:integer" />
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xsd:schema>

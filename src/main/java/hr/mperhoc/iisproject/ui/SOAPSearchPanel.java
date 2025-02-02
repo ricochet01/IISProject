@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 
 import hr.mperhoc.iisproject.util.HttpUtils;
@@ -62,18 +63,39 @@ public class SOAPSearchPanel extends JPanel {
 		c.gridy = 1;
 		add(tfFoodNameSearchBar, c);
 
+		JProgressBar pbValidation = new JProgressBar(0, 100);
+		pbValidation.setStringPainted(true);
+		c.gridx = 0;
+		c.gridy = 3;
+		c.gridwidth = 2;
+		add(pbValidation, c);
+
 		// Search button
 		btnSearch = new JButton("Search!");
 		btnSearch.addActionListener(e -> {
 			HttpResponse<String> result = HttpUtils.callSOAPServiceWebMethod(URL,
 					String.format(envelope, tfFoodNameSearchBar.getText()));
 
-			if (result.statusCode() == 200) {
-				JOptionPane.showMessageDialog(null, result.body(), "Search result", JOptionPane.INFORMATION_MESSAGE);
-			} else {
-				JOptionPane.showMessageDialog(null, "An error occured with the SOAP service!", "Error",
-						JOptionPane.WARNING_MESSAGE);
-			}
+			new Thread(() -> {
+				for (int j = 0; j <= 100; j++) {
+					pbValidation.setValue(j);
+					pbValidation.setString("Validated " + j + "%");
+					try {
+						Thread.sleep(50);
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
+				}
+
+				if (result.statusCode() == 200) {
+					JOptionPane.showMessageDialog(null, result.body(), "Search result",
+							JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "An error occured with the SOAP service!", "Error",
+							JOptionPane.WARNING_MESSAGE);
+				}
+			}).start();
+
 		});
 		c.gridx = 0;
 		c.gridy = 2;

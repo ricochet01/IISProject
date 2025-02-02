@@ -13,7 +13,7 @@ import javax.xml.validation.Validator;
 
 import org.xml.sax.SAXException;
 
-import hr.mperhoc.iisproject.model.Food;
+import hr.mperhoc.iisproject.model.list.FoodList;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
@@ -21,8 +21,8 @@ import jakarta.xml.bind.Unmarshaller;
 public class XMLValidator {
 	// Schema definitions
 	private static SchemaFactory xsdSchemaFactory, rngSchemaFactory;
-	private static URL xsdFile, rngFile;
-	private static Schema xsdSchema, rngSchema;
+	private static URL xsdFile, rngFile, xsdFoodsFile;
+	private static Schema xsdSchema, rngSchema, xsdFoodsSchema;
 	private static Validator xsdValidator, rngValidator;
 
 	private XMLValidator() {
@@ -34,6 +34,7 @@ public class XMLValidator {
 
 		xsdFile = XMLValidator.class.getResource("/xsd/food.xsd");
 		rngFile = XMLValidator.class.getResource("/rng/food.rng");
+		xsdFoodsFile = XMLValidator.class.getResource("/xsd/foods.xsd");
 
 		xsdSchemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		rngSchemaFactory = SchemaFactory.newInstance(XMLConstants.RELAXNG_NS_URI);
@@ -41,6 +42,7 @@ public class XMLValidator {
 		try {
 			xsdSchema = xsdSchemaFactory.newSchema(xsdFile);
 			rngSchema = rngSchemaFactory.newSchema(rngFile);
+			xsdFoodsSchema = xsdSchemaFactory.newSchema(xsdFoodsFile);
 
 			xsdValidator = xsdSchema.newValidator();
 			rngValidator = rngSchema.newValidator();
@@ -73,9 +75,9 @@ public class XMLValidator {
 
 	public static boolean validateJaxb(String xml) {
 		try {
-			JAXBContext jaxbContext = JAXBContext.newInstance(Food.class);
+			JAXBContext jaxbContext = JAXBContext.newInstance(FoodList.class);
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-			unmarshaller.setSchema(xsdSchema);
+			unmarshaller.setSchema(xsdFoodsSchema);
 
 			unmarshaller.unmarshal(new StringReader(xml));
 			return true;
