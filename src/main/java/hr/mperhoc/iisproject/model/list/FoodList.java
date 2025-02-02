@@ -1,5 +1,6 @@
 package hr.mperhoc.iisproject.model.list;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,8 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "foods")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class FoodList {
+public class FoodList implements Serializable {
+	private static final long serialVersionUID = -4944810554440830590L;
 	private Map<Integer, Food> foods = new HashMap<>();
 
 	public void add(Food f) {

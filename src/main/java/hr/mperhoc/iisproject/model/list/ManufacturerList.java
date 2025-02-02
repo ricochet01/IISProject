@@ -1,5 +1,6 @@
 package hr.mperhoc.iisproject.model.list;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,8 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "manufacturers")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class ManufacturerList {
+public class ManufacturerList implements Serializable {
+	private static final long serialVersionUID = 1644183728576125364L;
 	private Map<Integer, Manufacturer> manufacturers = new HashMap<>();
 
 	public void add(Manufacturer m) {

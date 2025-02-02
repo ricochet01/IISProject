@@ -4,13 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.net.http.HttpResponse.BodyHandlers;
 import java.util.Arrays;
 
 import javax.swing.JButton;
@@ -20,12 +14,15 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import hr.mperhoc.iisproject.util.HttpUtils;
+import hr.mperhoc.iisproject.util.HttpUtils.RequestType;
+
 public class RegisterPanel extends JPanel {
 	private static final long serialVersionUID = -1197889881026746142L;
-	private ApplicationWindow window;
 
 	private JTextField tfEmail, tfUsername;
 	private JPasswordField pfPassword, pfConfirmPassword;
@@ -33,7 +30,6 @@ public class RegisterPanel extends JPanel {
 
 	public RegisterPanel(ApplicationWindow window) {
 		super(new GridBagLayout());
-		this.window = window;
 		initComponents();
 	}
 
@@ -108,7 +104,7 @@ public class RegisterPanel extends JPanel {
 
 			try {
 				btnRegisterOnClick(e);
-			} catch (URISyntaxException | IOException | InterruptedException ex) {
+			} catch (JsonProcessingException ex) {
 				ex.printStackTrace();
 			}
 		});
@@ -118,8 +114,7 @@ public class RegisterPanel extends JPanel {
 		add(btnRegister, c);
 	}
 
-	private void btnRegisterOnClick(ActionEvent e) throws URISyntaxException, IOException, InterruptedException {
-		HttpClient client = HttpClient.newHttpClient();
+	private void btnRegisterOnClick(ActionEvent e) throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectNode rootNode = mapper.createObjectNode();
 
@@ -129,12 +124,9 @@ public class RegisterPanel extends JPanel {
 
 		String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
 
-		HttpRequest request = HttpRequest.newBuilder()
-				.uri(new URI("http://localhost:8080/iisproject/api/authentication/register"))
-				.header("Content-Type", "application/json").POST(HttpRequest.BodyPublishers.ofString(jsonString))
-				.build();
-
-		HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
+		HttpResponse<String> response = HttpUtils.sendRequest(
+				"http://localhost:8080/iisproject/api/authentication/register", jsonString, RequestType.POST,
+				"Content-Type", "application/json");
 
 		if (response.statusCode() == 201) {
 			JOptionPane.showMessageDialog(null, "Successfully created the account!", "Success",

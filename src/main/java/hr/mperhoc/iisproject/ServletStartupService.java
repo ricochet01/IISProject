@@ -2,7 +2,6 @@ package hr.mperhoc.iisproject;
 
 import hr.mperhoc.iisproject.xml.XMLUtils;
 import hr.mperhoc.iisproject.xml.XMLValidator;
-import hr.mperhoc.iisproject.xml.rpc.XMLRPCClient;
 import hr.mperhoc.iisproject.xml.rpc.XMLRPCServer;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
@@ -21,8 +20,8 @@ public class ServletStartupService implements ServletContextListener {
 		xmlRpcServer = new XMLRPCServer();
 		xmlRpcServer.start();
 
-		XMLRPCClient xmlRpcClient = new XMLRPCClient();
-		xmlRpcClient.getTemperature("Rijeka");
+//		XMLRPCClient xmlRpcClient = new XMLRPCClient();
+//		System.out.println("Result: " + xmlRpcClient.getTemperature("Rijeka"));
 	}
 
 	@Override

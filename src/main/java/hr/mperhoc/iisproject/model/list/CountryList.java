@@ -1,5 +1,6 @@
 package hr.mperhoc.iisproject.model.list;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,8 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "countries")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class CountryList {
+public class CountryList implements Serializable {
+	private static final long serialVersionUID = 1032709601390190126L;
 	private Map<Integer, Country> countries = new HashMap<>();
 
 	public void add(Country c) {

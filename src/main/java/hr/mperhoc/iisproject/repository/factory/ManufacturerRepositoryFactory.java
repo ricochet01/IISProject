@@ -1,14 +1,14 @@
 package hr.mperhoc.iisproject.repository.factory;
 
 import hr.mperhoc.iisproject.repository.ManufacturerRepository;
-import hr.mperhoc.iisproject.repository.ManufacturerRepositoryImpl;
+import hr.mperhoc.iisproject.repository.file.ManufacturerFileRepository;
 
 public class ManufacturerRepositoryFactory {
 	private static ManufacturerRepository instance;
 
 	public static ManufacturerRepository get() {
 		if (instance == null) {
-			instance = new ManufacturerRepositoryImpl();
+			instance = new ManufacturerFileRepository();
 		}
 		return instance;
 	}

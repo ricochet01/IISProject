@@ -75,7 +75,7 @@ public class FoodResource {
 		// Afterwards doing the same for the country
 		checkCountry(food);
 
-		return Response.ok().build();
+		return Response.status(Response.Status.CREATED).build();
 	}
 
 	private void checkManufacturer(Food food) {

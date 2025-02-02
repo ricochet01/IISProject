@@ -53,10 +53,11 @@ public class Weather {
 				String cityName = e.getElementsByTagName("GradIme").item(0).getTextContent();
 
 				// We found the city
-				if (cityName.toLowerCase().strip().contentEquals(cityLower)) {
+				if (cityName.toLowerCase().trim().contentEquals(cityLower)) {
 					Element data = (Element) e.getElementsByTagName("Podatci").item(0);
 					Node temperature = data.getElementsByTagName("Temp").item(0);
-					return Double.valueOf(temperature.getTextContent().strip());
+
+					return Double.valueOf(temperature.getTextContent().trim());
 				}
 			}
 		}

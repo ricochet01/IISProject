@@ -36,8 +36,6 @@ public class FoodService {
 			e.printStackTrace();
 		}
 
-		System.out.println(filteredXml);
-
 		return filteredXml;
 	}
 

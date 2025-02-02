@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 public class ApplicationWindow extends JFrame {
@@ -12,6 +11,7 @@ public class ApplicationWindow extends JFrame {
 	public static final String TITLE = "IIS Project - Client";
 
 	private JTabbedPane tpContent;
+	private String token; // Authorization Bearer token
 
 	public ApplicationWindow() {
 		super(TITLE);
@@ -29,11 +29,11 @@ public class ApplicationWindow extends JFrame {
 		tpContent = new JTabbedPane();
 
 		tpContent.add("Register", new RegisterPanel(this));
-		tpContent.add("Login", new JPanel());
-		tpContent.add("REST XSD", new JPanel());
-		tpContent.add("REST RNG", new JPanel());
-		tpContent.add("SOAP search", new JPanel());
-		tpContent.add("XML RPC", new JPanel());
+		tpContent.add("Login", new LoginPanel(this));
+		tpContent.add("REST XSD", new XMLEntityUploadPanel(this, "xsd"));
+		tpContent.add("REST RNG", new XMLEntityUploadPanel(this, "rng"));
+		tpContent.add("SOAP search", new SOAPSearchPanel(this));
+		tpContent.add("XML RPC", new XMLRPCWeatherPanel(this));
 
 		add(tpContent, BorderLayout.NORTH);
 
@@ -41,10 +41,28 @@ public class ApplicationWindow extends JFrame {
 		toggleServiceTabs(false);
 	}
 
+	void setTab(int index) {
+		tpContent.setSelectedIndex(index);
+	}
+
+	void toggleAuthenticationTabs(boolean toggle) {
+		// First two tabs are Register and Login
+		tpContent.setEnabledAt(0, toggle);
+		tpContent.setEnabledAt(1, toggle);
+	}
+
 	void toggleServiceTabs(boolean toggle) {
 		for (int i = 2; i < 6; i++) {
 			tpContent.setEnabledAt(i, toggle);
 		}
+	}
+
+	void setToken(String token) {
+		this.token = token;
+	}
+
+	String getToken() {
+		return token;
 	}
 
 }
